@@ -1,0 +1,14 @@
+{
+  "name": "ncs-visualizer-server",
+  "version": "1.0.0",
+  "description": "Local server for NCS Audio Visualizer - streams system audio & media metadata to web browsers",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "WatashiAD",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
