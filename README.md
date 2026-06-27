@@ -14,7 +14,7 @@ A WebGL2-powered particle sphere audio visualizer that synchronizes particle mov
 ![Normal View](resources/image.png)
 
 ### Standalone WebGL View (Watercolor + Antigravity Particles)
-![Standalone View](resources/image copy.png)
+![Standalone View](resources/image1.png)
 
 ---
 
