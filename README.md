@@ -1,10 +1,11 @@
 # 🎬 NCS Visualiser
-### *A Real-Time WebGL2 Audio Visualizer for Spotify & Standalone Browsers*
+### *A Real-Time WebGL2 Audio Visualizer for Spotify & System Audio*
 
-A WebGL2-powered particle sphere audio visualizer that synchronizes particle movements with Spotify's audio analysis. Features dynamic color extraction, a beautiful fullscreen interface, **word-by-word synced lyrics**, playback controls, and built-in developer tools.
+A WebGL2-powered particle sphere audio visualizer that synchronizes particle movements with system audio analysis via Python/PowerShell backend or Spotify's audio analysis. Features dynamic color extraction, a beautiful fullscreen interface, and word-by-word synced lyrics.
 
-[![Spicetify v2.43+](https://img.shields.io/badge/Spicetify-v2.43%2B-blue.svg?style=flat-square)](https://spicetify.app)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg?style=flat-square)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-Required-green.svg?style=flat-square)](https://nodejs.org)
+[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg?style=flat-square)](https://www.python.org/downloads/)
 
 ---
 
@@ -20,77 +21,90 @@ A WebGL2-powered particle sphere audio visualizer that synchronizes particle mov
 
 ## ✨ Features
 
-* 🔴 **NCS-Style Particle Sphere:** High-performance WebGL2 particle system driven by real-time amplitude curves from Spotify's audio analysis.
-* 🎨 **Dynamic Color Extraction:** Automatically extracts and applies theme colors from the playing track's album art.
-* 🖥️ **Stunning Fullscreen Mode:** Toggle a minimal, beautiful overlay displaying the track name, artist, interactive seek bar, and playback controls.
-* 🎛️ **Full Playback Controls:** Control Spotify directly from the visualizer with play/pause, next, previous, shuffle, and repeat buttons.
+* 🔴 **NCS-Style Particle Sphere:** High-performance WebGL2 particle system driven by real-time amplitude curves from system audio analysis.
+* 🎨 **Dynamic Color Extraction:** Automatically extracts and applies theme colors from album art (when available).
+* 🖥️ **Stunning Fullscreen Mode:** Toggle a minimal, beautiful overlay displaying track info, interactive seek bar, and playback controls.
+* 🎛️ **Full Playback Controls:** Control media playback with play/pause, next, previous, shuffle, and repeat buttons.
 * 🔊 **Volume Controller:** Quick mute button with a smooth hover-reveal volume slider.
 * 📊 **Developer Analysis Tools:** Built-in timeline overlays to visualize beats, bars, loudness, timbre, pitches, and rhythm analysis.
 * 📐 **Responsive Design:** Completely fluid typography and layout scaling perfectly to any viewport size.
 
 ### 🎤 Synced Lyrics Feature Set
-* **Word-by-Word Sync:** When paired with the [SpicyLyrics](https://github.com/spicylyricsapp) extension, lyrics are displayed with precise syllable-level sync — each word lights up exactly as it's being sung.
-* **Smooth Letter Animations:** Letters transition with a glowing highlight sweep. Already-sung letters stay lit with the theme color while upcoming letters remain dim, creating a flowing karaoke-style fill effect.
+* **Word-by-Word Sync:** When paired with the [SpicyLyrics](https://github.com/spicylyricsapp) extension, lyrics are displayed with precise syllable-level sync — each word lights up exactly as it's sung.
+* **Smooth Letter Animations:** Letters transition with a glowing highlight sweep. Already-sung letters stay lit with the theme color while upcoming letters remain dim, creating a flowing karaoke-style experience.
 * **Active Word Zoom:** The word currently being sung smoothly scales up (1.12×) with a soft ease-in-out transition, then gently scales back down.
 * **Music Note Interludes:** During instrumental breaks, animated music symbols (♪ ♫ ♬) bounce and glow in an overlapping sine-wave pattern.
 * **Line Fade Transitions:** When a lyric line ends, all letters gracefully fade out together before the next line appears.
 * **Lyrics Toggle:** Show/hide lyrics with a single click on the lyrics icon next to the song title.
-* **Graceful Fallback:** If SpicyLyrics data isn't available, the visualizer falls back to Spotify's line-level lyrics with evenly distributed letter animation.
+* **Graceful Fallback:** If SpicyLyrics data isn't available, the visualizer falls back to available lyrics with evenly distributed letter animation.
 
 ---
 
 ## 🚀 Installation
 
-For help with installing or uninstalling, check out the official [Spicetify FAQ](https://spicetify.app/docs/faq) or ask on the [Spicetify Discord](https://discord.gg/VnevqPp2Rr).
+### 🛠️ Prerequisites
 
-### 🛠️ Spicetify Custom App Setup
+- **Node.js** (v14 or higher) — [Download](https://nodejs.org)
+- **Python** (3.9 - 3.13, optional for enhanced performance) — [Download](https://www.python.org/downloads/)
+- **Windows** (audio capture currently Windows-only)
 
-1. **Open your Spicetify Config Directory**  
-   Open your terminal/command prompt and run:
-   ```bash
-   spicetify config-dir
-   ```
-2. **Navigate & Create Folder**  
-   Navigate to the `CustomApps` folder within that directory. Create a new folder named `visualizer`.
-3. **Download Project Files**  
-   Download the files from this repository and copy them into the `visualizer` folder you just created:
-   * `index.js`
-   * `manifest.json`
-   * `style.css`
-4. **Enable the Custom App**  
-   Add the app to your Spicetify configuration by running:
-   ```bash
-   spicetify config custom_apps visualizer
-   ```
-5. **Apply Configuration**  
-   Finalize the installation and apply changes to Spotify:
-   ```bash
-   spicetify apply
-   ```
-6. **Launch**  
-   Restart Spotify. A new **Visualizer** button will appear in your sidebar/navigation panel!
+### 📥 Setup
 
-> [!TIP]
-> **Best Lyrics Experience:**
-> For the best word-by-word synced lyrics, install the **SpicyLyrics** extension. Play a few songs with SpicyLyrics open so it caches syllable-level timing data, and the visualizer will automatically pick up the cached syllable data.
->
-> If SpicyLyrics is not active, the visualizer gracefully falls back to Spotify's standard line-level lyrics.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ALONEPHOENIX/NCS-LOCAL.git
+   cd NCS-LOCAL
+   ```
+
+2. **Install Node.js dependencies**
+   ```bash
+   npm install --prefix standalone
+   ```
+
+3. **(Optional) Install Python libraries for better performance**
+   ```bash
+   pip install winrt-Windows.Media.Control winrt-Windows.Storage.Streams
+   ```
+
+4. **Start the server**
+   ```bash
+   npm start
+   ```
+
+5. **Open in browser**
+   Navigate to [http://localhost:3000](http://localhost:3000) in your web browser.
+
+> [!NOTE]
+> If Python is not installed or the required libraries are missing, the server will automatically fall back to the optimized PowerShell engine — everything will still work perfectly out-of-the-box!
 
 ---
 
-## 🔄 Upgrading / Migrating
+## 🖥️ Standalone Browser Visualizer
 
-### Upgrading from the older "NCS Visualizer"
+The visualizer runs as a local web application, capturing your system's real-time audio output.
 
-If you previously had the older `ncs-visualiser` installed, remove it first to avoid configuration conflicts:
+### ⚡ Features:
+- **Multi-Backend Audio Capture**: 
+  - **Python (Recommended):** Ultra-low latency via `winrt` bindings to Windows Media Transport Controls
+  - **PowerShell (Fallback):** Optimized script-based fallback for Windows systems
+- **Dynamic Watercolor Background:** An animated, procedural WebGL2 fragment shader background simulating watercolor paint soaking and warping on coarse textured paper, reacting dynamically to the music.
+- **Antigravity Particle Attractor:** 1,800 high-density glowing white capsules that drift randomly, but pull together to form a wavy, pulsating 3D ring whenever you move your cursor near them.
+- **Symmetrical Staircase Preloader:** A visualizer loading wipe animation that staggers vertical curtains from the outer edges to the center from both the top and bottom halves of the screen.
 
-1. Open your Spicetify config directory (`spicetify config-dir`).
-2. Navigate to `CustomApps` and **delete** the `ncs-visualiser` folder.
-3. Remove the old app from your configuration:
+### 🚀 Quick Start
+
+1. **Install dependencies**
    ```bash
-   spicetify config custom_apps ncs-visualiser-
+   npm install --prefix standalone
    ```
-4. Follow the **Installation Instructions** above to set up the new version.
+
+2. **Start the local server**
+   ```bash
+   npm start
+   ```
+
+3. **Open the app**
+   Open [http://localhost:3000](http://localhost:3000) in your web browser (Brave, Chrome, Firefox, Edge, etc.).
 
 ---
 
@@ -111,57 +125,16 @@ If you previously had the older `ncs-visualiser` installed, remove it first to a
 
 ---
 
-## 🖥️ Standalone Visualizer Mode (Browser Version)
-
-The visualizer can run directly inside any standard web browser (like Brave, Chrome, or Firefox), completely independent of Spicetify or Spotify! It works by capturing your system's raw audio output and query-syncing Windows media player details in real-time.
-
-### ⚡ Features:
-- **Zero-Dependency Audio Loopback**: Includes a custom compiled C# binary that binds to the Windows WASAPI audio device, streaming raw PCM amplitudes to the local server.
-- **Dynamic Watercolor Background**: An animated, procedural WebGL2 fragment shader background simulating watercolor paint soaking and warping on coarse textured paper, reacting dynamically to the music's mid-range/vocals.
-- **Antigravity Particle Attractor**: 1,800 high-density glowing white capsules that drift randomly, but pull together to form a wavy, pulsating 3D ring whenever you move your cursor near them. Includes frame buffer alpha accumulation trails for liquid-like motion ghosting.
-- **Symmetrical Staircase Preloader**: A visualizer loading wipe animation that staggers vertical curtains from the outer edges to the center from both the top and bottom halves of the screen.
-
-### 🚀 Quick Start
-
-1. **Install Node.js dependencies**
-   ```bash
-   npm install --prefix standalone
-   ```
-2. **Start the local server**
-   ```bash
-   npm start
-   ```
-3. **Open the App**
-   Open [http://localhost:3000](http://localhost:3000) in your web browser.
-
-### 🚀 High-Performance Windows Media Integration (Optional)
-
-By default, the server queries the **Windows Global System Media Transport Controls (GSMTC)** via an optimized PowerShell fallback script. To achieve ultra-low latency, zero CPU usage, and high-speed media state updates, you can install Python and its native WinRT bindings:
-
-1. **Install Python**  
-   Download and install [Python 3.9 - 3.13](https://www.python.org/downloads/) (ensure **"Add Python to PATH"** is checked during installation).
-2. **Install Native Bindings**  
-   Run the following command in your terminal/command prompt:
-   ```bash
-   pip install winrt-Windows.Media.Control winrt-Windows.Storage.Streams
-   ```
-
-> [!NOTE]
-> If Python is not installed or the libraries are missing, the server will automatically fall back to the optimized PowerShell engine, meaning it will still work perfectly out-of-the-box!
-
----
-
 ## 📁 File Structure
 
 ```
-visualizer/
+NCS-LOCAL/
 ├── resources/              # Preview screenshots
-│   ├── Normal.png
-│   └── FullScreen.png
+│   ├── image.png
+│   └── image1.png
 ├── standalone/             # Standalone Browser App
 │   ├── backend/            # Audio capture & media session tools
 │   │   ├── audio-capture.js
-│   │   ├── AudioCapture.cs # WASAPI loopback C# source
 │   │   ├── media-session.js
 │   │   └── media-session.py
 │   ├── src/                # Web visualizer client files
@@ -173,9 +146,6 @@ visualizer/
 │   │   └── settings.js     # Settings preference panel
 │   ├── server.js           # Local HTTP & WebSocket Node server
 │   └── package.json
-├── index.js                # Spicetify Custom App Component
-├── style.css               # Spicetify App Styles
-├── manifest.json           # Spicetify Manifest file
 ├── LICENSE                 # License info
 └── README.md               # Project documentation
 ```
@@ -189,38 +159,41 @@ You can customize the standalone browser visualizer's settings by editing these 
 * **Background Shaders & Particles:** Edit `standalone/src/antigravity.js` to change the colors of the watercolor shader, adjust particle count (`count`), or tune pointer magnet radius (`magnetRadius`).
 * **Entry Preloader Curtains:** Edit `standalone/src/style.css` (search for `.preloader`) to tune transition times, column counts, or change keyframe easing parameters.
 * **Circle Visualizer:** Edit `standalone/src/renderer.js` to adjust default WebGL settings or circle render properties.
+* **Audio Settings:** Edit `standalone/src/audio-engine.js` to modify FFT settings, frequency bands, or sensitivity.
 
 ---
 
 ## 🛠️ Development & Building
 
-There is **no build step required**! All React components and WebGL shaders are written inside `index.js`. 
+**No build step required!** All WebGL shaders and components are written directly in the source files.
 
-You can edit `index.js` or `style.css` directly and then run:
-```bash
-spicetify apply
-```
-to see your changes instantly.
+Edit any file in `standalone/src/` or backend files directly, then refresh your browser to see changes instantly (or restart the server if modifying backend files).
 
 ---
 
-## 🎤 Lyrics Data Sources
+## 🔧 Troubleshooting
 
-| Priority | Source | Sync Quality | Description |
-| :---: | :--- | :--- | :--- |
-| 1 | SpicyLyrics Cache | ⭐ Syllable-level | Best quality — per-word timing from the SpicyLyrics extension |
-| 2 | SpicyLyrics API | ⭐ Syllable-level | Fresh fetch from SpicyLyrics backend |
-| 3 | Spotify `wg://` API | Line-level | Spotify's color-lyrics endpoint |
-| 4 | Spotify `spclient` API | Line-level | Spotify's spclient endpoint |
-| 5 | Spotify `hm://` API | Line-level | Older Spotify lyrics endpoint |
+### Audio not playing?
+- Ensure you have **Windows Media Player** or similar media controls running
+- Check that your system audio is being routed to the default audio device
+- Try restarting the Node.js server: `npm start`
+
+### Python bindings failing?
+- Install Python 3.9-3.13 with `Add Python to PATH` checked
+- Run: `pip install winrt-Windows.Media.Control winrt-Windows.Storage.Streams`
+- If issues persist, the server will automatically fall back to PowerShell
+
+### High CPU usage?
+- Close other background applications
+- Install Python bindings for better performance (reduces polling frequency)
+- Check browser DevTools console for any JavaScript errors
 
 ---
 
 ## 👥 Credits
 
-* Built using the **[Spicetify](https://spicetify.app)** Custom App API.
 * WebGL2 particle rendering inspired by standard NCS visualizer designs.
-* Audio analysis data powered by **Spotify Web API**.
+* Audio analysis data powered by system audio capture via Windows Media APIs.
 * Lyrics sync powered by **[SpicyLyrics](https://github.com/spicylyricsapp)**.
 * Typography: [Rubik Spray Paint](https://fonts.google.com/specimen/Rubik+Spray+Paint) & [Jua](https://fonts.google.com/specimen/Jua) via Google Fonts.
 * Icons: [Material Icons](https://fonts.google.com/icons) by Google.
